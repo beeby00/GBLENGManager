@@ -8,7 +8,7 @@
       this.Elm_NACnt = this.Elm_Base.getElementsByClassName('js_NACnt')[0];
       this.Elm_SAs = this.Elm_Base.getElementsByClassName('js_SAs');
       this.Elm_SATypes = this.Elm_Base.getElementsByClassName('SAType');
-      this.Elm_His = document.getElementById('js_history1');
+      this.Elm_His = this.Elm_Base.getElementsByClassName('js_history')[0];
 
       this.NACnt=0;  //Normal Attack Count
       this.NACnt_bfr=0;  //Normal Attack Count for Undo
@@ -34,33 +34,46 @@
     }
 
     printStatus(){
-      this.Elm_CEgy.value = this.CEgy;
-      //console.log(this.Elm_CEgy.value);
-      this.Elm_NACnt.value = this.NACnt;
+      this.Elm_CEgy.value = this.CEgy;    //Update Charged Energy
+      this.Elm_NACnt.value = this.NACnt;  //Update Normal Count
+
+      //Update Special Attack button
       const Array_SAs = Array.from( this.Elm_SAs );
-      Array_SAs.forEach( (value, index, array) => {
+      Array_SAs.forEach( (Elm, index) => {
         const SAEgy = 35 + index*5;
         const div = Math.floor(this.Elm_CEgy.value/SAEgy);
         const diff = SAEgy - this.Elm_CEgy.value;
         if(this.Elm_NAEgy.value == '' || this.Elm_NAEgy.vales === 0){
-          array[index].value = '-回';
+          //array[index].value = '-回';
+          Elm.value = '-回';
           this.selectNAEgy();
         } else
         if(div == 0){
-          array[index].style.backgroundColor = '';
-          array[index].value = '残り:' + Math.ceil(diff/this.Elm_NAEgy.value) + '回';
+          Elm.style.backgroundColor = '';
+          Elm.value = Math.ceil(diff/this.Elm_NAEgy.value) + '回';
         } else{
-          array[index].style.backgroundColor = 'yellow';
+          Elm.style.backgroundColor = 'yellow';
           const next = Math.ceil((SAEgy*(div+1) - this.Elm_CEgy.value)/this.Elm_NAEgy.value);
-          array[index].value = '残り:' + next + '回(' + div + ')';
+          Elm.value = next + '回(' + div + ')';
         }
+      });
+
+      //Update Special Attack outer boxes
+      //Array化してforEachで回して、SAEgy1/2で判断したほうが良さそう。
+      const Array_SATypes = Array.from( this.Elm_SATypes );
+      Array_SATypes.forEach( (value, index, array) => {
+        const SAIdx1 = (this.SAEgy1 - 35)/5;
+        const SAIdx2 = (this.SAEgy2 - 35)/5;
+
+        if(index == SAIdx1) array[index].style.backgroundColor = 'yellow';
+        if(index == SAIdx2) array[index].style.backgroundColor = 'yellow';
       });
     }
 
     async printHistory(SPEgy){
       const newHist = await document.createElement("p");
-      this.Elm_His.appendChild(newHist);
       newHist.textContent = '通常技(' + this.NAEgy + '): ' + this.NACnt_bfr + '回/ゲージ技: ' + SPEgy  + '/残ゲージ: ' + this.CEgy;
+      this.Elm_His.appendChild(newHist);
     }
 
     attack_N(){
@@ -95,23 +108,10 @@
       this.CEgy -= Egy;
       this.NACnt = 0;
 
-      console.log(Egy);
-
       //Set SAEgy
       if(Egy == this.SAEgy1 || Egy == this.SAEgy2);
       else if(this.SAEgy1 == 0) this.SAEgy1 = Egy;
       else this.SAEgy2 = Egy;
-
-      console.log(this.SAEgy1 + '/' + this.SAEgy2);
-
-      //printStatusに移植する？
-      //Array化してforEachで回して、SAEgy1/2で判断したほうが良さそう。
-      const SAIdx = (Egy - 35)/5;
-      console.log(SAIdx);
-      if(!Number.isInteger(SAIdx)) this.dispError('Internal Error');
-      this.Elm_SATypes[SAIdx].style.backgroundColor = 'yellow';
-      
-      console.log(SAIdx);
 
       this.printStatus();
       this.printHistory(Egy);
@@ -137,6 +137,15 @@
   const opp = [opp1, opp2, opp3]
   let oppIndex = 0;
 
+  function swOpps(Idx){
+    oppIndex = Idx;
+    opp.forEach( (value, index, array) => {
+      if(index == Idx) value.Elm_Base.style.backgroundColor = '#FFF8DC';
+      else value.Elm_Base.style.backgroundColor = '#BBBBBB';
+    });
+  }
+
+  //UpdateStatus on change NAEgy
   const SeleNAEgy = document.getElementsByClassName('js_NAEgy');
   SeleNAEgy[0].addEventListener('change', () => opp[0].printStatus());
   SeleNAEgy[1].addEventListener('change', () => opp[1].printStatus());
@@ -149,68 +158,42 @@
     //w: select NAEgy
     //s,d,f,g,h,x,c,v,b,n: SA
     //Z+ctrl: Undo
-    if(event.key === '1' && event.ctrlKey){
-      oppIndex = 0;
-      opp[0].Elm_Base.style.backgroundColor = 'lightblue';
-      opp[1].Elm_Base.style.backgroundColor = '';
-      opp[2].Elm_Base.style.backgroundColor = '';
-    }
-    if(event.key === '2' && event.ctrlKey){
-      oppIndex = 1;
-      opp[1].Elm_Base.style.backgroundColor = 'lightblue';
-      opp[0].Elm_Base.style.backgroundColor = '';
-      opp[2].Elm_Base.style.backgroundColor = '';
-    }
-    if(event.key === '3' && event.ctrlKey){
-      oppIndex = 2;
-      opp[2].Elm_Base.style.backgroundColor = 'lightblue';
-      opp[1].Elm_Base.style.backgroundColor = '';
-      opp[0].Elm_Base.style.backgroundColor = '';
-    }
-    if(event.key === 'w'){
-      opp[oppIndex].selectNAEgy();
-    } else
-    if(event.key === 'a'){
-      opp[oppIndex].attack_N();
-    } else
-
+    if(event.key === '1' && event.ctrlKey) swOpps(0);
+    else if(event.key === '2' && event.ctrlKey) swOpps(1);
+    else if(event.key === '3' && event.ctrlKey) swOpps(2);
+    else if(event.key === 'w') opp[oppIndex].selectNAEgy();
+    else if(event.key === 'a') opp[oppIndex].attack_N();
     //attack_S
-    if(event.key === 's'){
-      opp[oppIndex].attack_S(35);
-    } else
-    if(event.key === 'd'){
-      opp[oppIndex].attack_S(40);
-    } else
-    if(event.key === 'f'){
-      opp[oppIndex].attack_S(45);
-    } else
-    if(event.key === 'g'){
-      opp[oppIndex].attack_S(50);
-    } else
-    if(event.key === 'h'){
-      opp[oppIndex].attack_S(55);
-    } else
-    if(event.key === 'x'){
-      opp[oppIndex].attack_S(60);
-    } else
-    if(event.key === 'c'){
-      opp[oppIndex].attack_S(65);
-    } else
-    if(event.key === 'v'){
-      opp[oppIndex].attack_S(70);
-    } else
-    if(event.key === 'b'){
-      opp[oppIndex].attack_S(75);
-    } else
-    if(event.key === 'n'){
-      opp[oppIndex].attack_S(80);
-    } else
+    else if(event.key === 's') opp[oppIndex].attack_S(35);
+    else if(event.key === 'd') opp[oppIndex].attack_S(40);
+    else if(event.key === 'f') opp[oppIndex].attack_S(45);
+    else if(event.key === 'g') opp[oppIndex].attack_S(50);
+    else if(event.key === 'h') opp[oppIndex].attack_S(55);
+    else if(event.key === 'x') opp[oppIndex].attack_S(60);
+    else if(event.key === 'c') opp[oppIndex].attack_S(65);
+    else if(event.key === 'v') opp[oppIndex].attack_S(70);
+    else if(event.key === 'b') opp[oppIndex].attack_S(75);
+    else if(event.key === 'n') opp[oppIndex].attack_S(80);
     //end atttack_S
-    if(event.key === 'z' && event.ctrlKey){
-      opp[oppIndex].undo();
-    }
+    else if(event.key === 'z' && event.ctrlKey) opp[oppIndex].undo();
   });
 
+
+  //Mouse Click & Tap action
+  opp.forEach( (OPP, index) => {
+    //Switch Opponents
+    OPP.Elm_Base.addEventListener( 'click', () => swOpps(index));
+    //opp[1].Elm_Base.addEventListener( 'click', () => swOpps(1));
+    //opp[2].Elm_Base.addEventListener( 'click', () => swOpps(2));
+    //attack_N
+    OPP.Elm_NACnt.addEventListener( 'click', () => { OPP.attack_N();});
+    //attack_S
+    const Array_SAs = Array.from( OPP.Elm_SAs );
+    Array_SAs.forEach( (Elm, index) => {
+      const SAEgy = 35 + index*5;
+      Elm.addEventListener( 'click', () => { OPP.attack_S(SAEgy);});
+    });
+  });
 
 
 })();

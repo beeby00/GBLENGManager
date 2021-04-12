@@ -12,15 +12,14 @@
 </head>
 
 <body>
-  <h1>GO Battile League Enargy Manager</h1>
 
   <div id="main">
-    <section id="ctrls">
-      <div id="js_opp1" class="opp">
+    <h1>GO Battile League Enargy Manager</h1>
+    <div id="mainContents">
+      <section id="js_opp1" class="opp">
         <h3>１匹目(ctrl + 1)</h3>
-        <div class="CEng">エネルギー: <input class="js_CEgy" value=0 type="number" readonly></div>
         <div class="NAEgy">
-          =通常技EPTank: 
+          通常技EPTank:
           <select class="js_NAEgy">
             <option value="20">20</option>
             <option value="16">16</option>
@@ -40,61 +39,63 @@
           (w)
         </div>
         <div class="NACnt">×<input class="js_NACnt" type="button">回(a)</div>
+        <div class="CEgy">エネルギー: <input class="js_CEgy" value=0 type="number" readonly></div>
         <div class="SAInfo">
           <ul class="SATable">
             <li>
-              <p class="SAType">35</p>
-              <input type="button" value="0" class="js_SAs">(s)
+              <p class="SAType">35(s)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">40</p>
-              <input type="button" value="0" class="js_SAs">(d)
+              <p class="SAType">40(d)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">45</p>
-              <input type="button" value="0" class="js_SAs">(f)
+              <p class="SAType">45(f)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">50</p>
-              <input type="button" value="0" class="js_SAs">(g)
+              <p class="SAType">50(g)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">55</p>
-              <input type="button" value="0" class="js_SAs">(h)
+              <p class="SAType">55(h)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
           </ul>
           <div class="mater1_out"><div class="mater1_in"></div></div>
           <ul class="SATable">
             <li>
-              <p class="SAType">60</p>
-              <input type="button" value="0" class="js_SAs">(x)
+              <p class="SAType">60(x)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">65</p>
-              <input type="button" value="0" class="js_SAs">(c)
+              <p class="SAType">65(c)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">70</p>
-              <input type="button" value="0" class="js_SAs">(v)
+              <p class="SAType">70(d)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">75</p>
-              <input type="button" value="0" class="js_SAs">(b)
+              <p class="SAType">75(b)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">80</p>
-              <input type="button" value="0" class="js_SAs">(n)
+              <p class="SAType">80(n)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
           </ul>
           <div class="mater1_out"><div class="mater1_in"></div></div>
         </div>
-      </div>
+        <p>履歴</p>
+        <div class="js_history"></div>
+      </section>
 
-      <div id="js_opp2" class="opp">
+      <section id="js_opp2" class="opp">
         <h3>２匹目(ctrl + 2)</h3>
-        <div class="CEng">エネルギー: <input class="js_CEgy" value=0 type="number" readonly></div>
         <div class="NAEgy">
-          =通常技EPTank: 
+          通常技EPTank:
           <select class="js_NAEgy">
             <option value="20">20</option>
             <option value="16">16</option>
@@ -111,63 +112,67 @@
             <option value="3">3</option>
             <option value="2">2</option>
           </select>
-          (q)
+          (w)
         </div>
         <div class="NACnt">×<input class="js_NACnt" type="button">回(a)</div>
+        <div class="CEgy">エネルギー: <input class="js_CEgy" value=0 type="number" readonly></div>
         <div class="SAInfo">
           <ul class="SATable">
             <li>
-              <p class="SAType">35</p>
-              <input type="button" value="0" class="js_SAs">(s)
+              <p class="SAType">35(s)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">40</p>
-              <input type="button" value="0" class="js_SAs">(d)
+              <p class="SAType">40(d)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">45</p>
-              <input type="button" value="0" class="js_SAs">(f)
+              <p class="SAType">45(f)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">50</p>
-              <input type="button" value="0" class="js_SAs">(g)
+              <p class="SAType">50(g)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">55</p>
-              <input type="button" value="0" class="js_SAs">(h)
+              <p class="SAType">55(h)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
           </ul>
+          <div class="mater1_out"><div class="mater1_in"></div></div>
           <ul class="SATable">
             <li>
-              <p class="SAType">60</p>
-              <input type="button" value="0" class="js_SAs">(x)
+              <p class="SAType">60(x)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">65</p>
-              <input type="button" value="0" class="js_SAs">(c)
+              <p class="SAType">65(c)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">70</p>
-              <input type="button" value="0" class="js_SAs">(v)
+              <p class="SAType">70(d)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">75</p>
-              <input type="button" value="0" class="js_SAs">(b)
+              <p class="SAType">75(b)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">80</p>
-              <input type="button" value="0" class="js_SAs">(n)
+              <p class="SAType">80(n)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
           </ul>
+          <div class="mater1_out"><div class="mater1_in"></div></div>
         </div>
-      </div>
+        <p>履歴</p>
+        <div class="js_history"></div>
+      </section>
 
 
-      <div id="js_opp3" class="opp">
+      <section id="js_opp3" class="opp">
         <h3>３匹目(ctrl +3)</h3>
-        <div class="CEng">エネルギー: <input class="js_CEgy" value=0 type="number" readonly></div>
         <div class="NAEgy">
-          =通常技EPTank:
+          通常技EPTank:
           <select class="js_NAEgy">
             <option value="20">20</option>
             <option value="16">16</option>
@@ -184,72 +189,64 @@
             <option value="3">3</option>
             <option value="2">2</option>
           </select>
-          (q)
+          (w)
         </div>
         <div class="NACnt">×<input class="js_NACnt" type="button">回(a)</div>
+        <div class="CEgy">エネルギー: <input class="js_CEgy" value=0 type="number" readonly></div>
         <div class="SAInfo">
           <ul class="SATable">
             <li>
-              <p class="SAType">35</p>
-              <input type="button" value="0" class="js_SAs">(s)
+              <p class="SAType">35(s)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">40</p>
-              <input type="button" value="0" class="js_SAs">(d)
+              <p class="SAType">40(d)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">45</p>
-              <input type="button" value="0" class="js_SAs">(f)
+              <p class="SAType">45(f)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">50</p>
-              <input type="button" value="0" class="js_SAs">(g)
+              <p class="SAType">50(g)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">55</p>
-              <input type="button" value="0" class="js_SAs">(h)
+              <p class="SAType">55(h)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
           </ul>
+          <div class="mater1_out"><div class="mater1_in"></div></div>
           <ul class="SATable">
             <li>
-              <p class="SAType">60</p>
-              <input type="button" value="0" class="js_SAs">(x)
+              <p class="SAType">60(x)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">65</p>
-              <input type="button" value="0" class="js_SAs">(c)
+              <p class="SAType">65(c)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">70</p>
-              <input type="button" value="0" class="js_SAs">(v)
+              <p class="SAType">70(d)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">75</p>
-              <input type="button" value="0" class="js_SAs">(b)
+              <p class="SAType">75(b)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
             <li>
-              <p class="SAType">80</p>
-              <input type="button" value="0" class="js_SAs">(n)
+              <p class="SAType">80(n)</p>
+              <input type="button" value="0" class="js_SAs">
             </li>
           </ul>
+          <div class="mater1_out"><div class="mater1_in"></div></div>
         </div>
-      </div>
-
-
-
-
-    </section>
-    <section id="history">
-      <div id="js_history1"></div>
-      <div id="js_history2"></div>
-      <div id="js_history3"></div>
-    </section>
+        <p>履歴</p>
+        <div class="js_history"></div>
+      </section>
+    </div>
+    <footer><a href="https://twitter.com/beeby001">Copyright © 2021 @Beeby00 All Rights Reserved.</a></footer>
   </div>
-
-
-
-
-  <footer><a href="https://twitter.com/beeby001">Copyright © 2021 @Beeby00 All Rights Reserved.</a></footer>
 
   <script src="./script/main_class.js"></script>
 </body>
