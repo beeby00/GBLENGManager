@@ -1,0 +1,140 @@
+(async function main() {
+  const opponent = class{
+    constructor(Elm_Id) {
+      this.Elm_Base = document.getElementById('js_'+Elm_Id);
+      this.Elm_CEgy = this.Elm_Base.getElementsByClassName('js_CEgy')[0];
+      this.Elm_NAEgy = this.Elm_Base.getElementsByClassName('js_NAEgy')[0];
+      this.Elm_NACnt = this.Elm_Base.getElementsByClassName('js_NACnt')[0];
+      this.Elm_His = document.getElementById('js_history1');
+
+      this.NACnt=0;  //Normal Attack Count
+      this.NACnt_bfr=0;  //Normal Attack Count for Undo
+      this.NAEgy=0;  //Normal Attack Energy
+      this.CEgy=0;  //Charged Energy
+      this.CEgy_bfr=0;  //Charged Energy for Undo
+      this.SAEgy1=0; //Special Attack 1 Energy
+      this.SAEgy2=0; //Special Attack 2 Energy
+      this.lastMethod = 0;  //lastMethod type for undo{0:init, 1:attack_N(), 2:attack_S()}
+
+      this.Elm_CEgy.value = this.CEgy;
+      this.Elm_NAEgy.value = this.NAEgy;
+      this.Elm_NACnt.value = this.NACnt;
+    }
+
+//    console.log(this.Elm_CEgy.value);
+//    this.Elm_CEgy.addEventListener('change', event => {
+//      console.log('event');
+//    });
+
+    dispError(msg){
+      console.error(msg); //後でメッセージ枠を準備。共通ならGlobal関数で良さそう
+    }
+
+    printStatus(){
+      this.Elm_CEgy.value = this.CEgy;
+      console.log(this.Elm_CEgy.value);
+      //this.Elm_NAEgy.value = this.NAEgy;
+      this.Elm_NACnt.value = this.NACnt;
+    }
+
+    async printHistory(SPEgy){
+      const newHist = await document.createElement("p");
+      this.Elm_His.appendChild(newHist);
+      newHist.textContent = '通常技(' + this.NAEgy + '): ' + this.NACnt_bfr + '回/ゲージ技: ' + SPEgy  + '/残ゲージ: ' + this.CEgy;
+    }
+
+    attack_N(){
+      //put current data into bfr variable.
+      this.NACnt_bfr = this.NACnt;
+      this.CEgy_bfr = this.CEgy;
+      this.lastMethod = 1;
+
+      //Synch NAEgy
+      this.NAEgy = this.Elm_NAEgy.value;
+
+      //Main action
+      ++this.NACnt;
+      const tmpCEgy = this.NACnt * this.NAEgy;
+      tmpCEgy<100?this.CEgy=tmpCEgy:this.CEgy=100;
+
+      this.printStatus();
+      return;
+    }
+
+    attack_S(Egy){
+      if(this.CEgy - Egy<0){
+        this.dispError('エネルギーが足りません。');
+        return;
+      }
+
+      //put current data into bfr variable.
+      this.NACnt_bfr = this.NACnt;
+      this.CEgy_bfr = this.CEgy;
+      this.lastMethod = 2;  //0: init, 1: attack_N(), 2:attack_S()
+
+      this.CEgy -= Egy;
+      this.NACnt = 0;
+
+      //Set SAEgy
+      if(Egy == this.SAEgy1 || Egy == this.SAEgy2);
+      else if(this.SAEgy1 == 0){
+        this.SAEgy1 = Egy;
+      } else this.SAEgy1 = Egy;
+
+      this.printStatus();
+      this.printHistory(Egy);
+
+      return;
+    }
+
+    selectNAEgy(){
+      this.Elm_NAEgy.focus();
+    }
+
+    undo(){
+      this.NACnt = this.NACnt_bfr;
+      this.CEgy = this.CEgy_bfr;
+      //rm_object = this.Elm_His.getElementByTagName('p');
+      if(this.lastMethod === 2) this.Elm_His.removeChild(this.Elm_His.lastElementChild);
+
+      this.printStatus();
+    }
+    
+
+  }
+
+  const opp1 = new opponent('opp1');
+  const opp2 = new opponent('opp2');
+  const opp3 = new opponent('opp3');
+  const opp = [opp1, opp2, opp3]
+  let oppIndex = 0;
+
+  //Key push action
+  document.body.addEventListener('keydown', event => {
+    //q + Num: select Opp
+    //a: NA
+    //w: select NAEgy
+    //s,d,f,g,h,x,c,v,b,n: SA
+    //Z+ctrl: Undo
+    if(event.key === 'q'){
+      if(event.key === '1') oppIndex = 0;
+      if(event.key === '2') oppIndex = 1;
+      if(event.key === '3') oppIndex = 2;
+    } else
+    if(event.key === 'w'){
+      opp[oppIndex].selectNAEgy();
+    } else
+    if(event.key === 'a'){
+      opp[oppIndex].attack_N();
+    } else
+    if(event.key === 's'){
+      opp[oppIndex].attack_S(35);
+    } else
+    if(event.key === 'Z' && event.ctrlKey){
+      opp[oppIndex].undo();
+    }
+  });
+
+
+
+})();

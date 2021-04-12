@@ -1,28 +1,255 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<<title>GO Battile League Enargy Manager</title>
+  <title>GO Battile League Enargy Manager</title>
 
-<meta charset="utf-8" />
-<meta name="description" content="Enargy Manager for Pokemon Go Go Battle League.">
-<meta name="twitter:title" content="Enargy Manager for GBL by beeby00">
+  <meta charset="utf-8">
+  <meta name="description" content="Enargy Manager for Pokemon Go Go Battle League.">
+  <meta name="twitter:title" content="Enargy Manager for GBL by beeby00">
 
-<link href="style/main.css" rel="stylesheet">
-<link rel="icon" href="favicon.ico">
+  <link href="style/main.css" rel="stylesheet">
+  <link rel="icon" href="favicon.ico">
+</head>
 
 <body>
+  <h1>GO Battile League Enargy Manager</h1>
 
-<h1>GO Battile League Enargy Manager</h1>
+  <div id="main">
+    <section id="ctrls">
+      <div id="js_opp1" class="opp">
+        <h3>１匹目(ctrl + 1)</h3>
+        <div class="CEng">エネルギー: <input class="js_CEgy" value=0 type="number" readonly></div>
+        <div class="NAEgy">
+          =通常技EPTank: 
+          <select class="js_NAEgy">
+            <option value="20">20</option>
+            <option value="16">16</option>
+            <option value="13">13</option>
+            <option value="12">12</option>
+            <option value="11">11</option>
+            <option value="10">10</option>
+            <option value="9">9</option>
+            <option value="8">8</option>
+            <option value="7">7</option>
+            <option value="6">6</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+          </select>
+          (w)
+        </div>
+        <div class="NACnt">×<input class="js_NACnt" type="button">回(a)</div>
+        <div class="SAInfo">
+          <ul class="SATable">
+            <li>
+              <p class="SAType">35</p>
+              <input type="button" value="0" class="js_SAs">(s)
+            </li>
+            <li>
+              <p class="SAType">40</p>
+              <input type="button" value="0" class="js_SAs">(d)
+            </li>
+            <li>
+              <p class="SAType">45</p>
+              <input type="button" value="0" class="js_SAs">(f)
+            </li>
+            <li>
+              <p class="SAType">50</p>
+              <input type="button" value="0" class="js_SAs">(g)
+            </li>
+            <li>
+              <p class="SAType">55</p>
+              <input type="button" value="0" class="js_SAs">(h)
+            </li>
+          </ul>
+          <div class="mater1_out"><div class="mater1_in"></div></div>
+          <ul class="SATable">
+            <li>
+              <p class="SAType">60</p>
+              <input type="button" value="0" class="js_SAs">(x)
+            </li>
+            <li>
+              <p class="SAType">65</p>
+              <input type="button" value="0" class="js_SAs">(c)
+            </li>
+            <li>
+              <p class="SAType">70</p>
+              <input type="button" value="0" class="js_SAs">(v)
+            </li>
+            <li>
+              <p class="SAType">75</p>
+              <input type="button" value="0" class="js_SAs">(b)
+            </li>
+            <li>
+              <p class="SAType">80</p>
+              <input type="button" value="0" class="js_SAs">(n)
+            </li>
+          </ul>
+          <div class="mater1_out"><div class="mater1_in"></div></div>
+        </div>
+      </div>
 
-<div id="main">
-  <div id="data">
+      <div id="js_opp2" class="opp">
+        <h3>２匹目(ctrl + 2)</h3>
+        <div class="CEng">エネルギー: <input class="js_CEgy" value=0 type="number" readonly></div>
+        <div class="NAEgy">
+          =通常技EPTank: 
+          <select class="js_NAEgy">
+            <option value="20">20</option>
+            <option value="16">16</option>
+            <option value="13">13</option>
+            <option value="12">12</option>
+            <option value="11">11</option>
+            <option value="10">10</option>
+            <option value="9">9</option>
+            <option value="8">8</option>
+            <option value="7">7</option>
+            <option value="6">6</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+          </select>
+          (q)
+        </div>
+        <div class="NACnt">×<input class="js_NACnt" type="button">回(a)</div>
+        <div class="SAInfo">
+          <ul class="SATable">
+            <li>
+              <p class="SAType">35</p>
+              <input type="button" value="0" class="js_SAs">(s)
+            </li>
+            <li>
+              <p class="SAType">40</p>
+              <input type="button" value="0" class="js_SAs">(d)
+            </li>
+            <li>
+              <p class="SAType">45</p>
+              <input type="button" value="0" class="js_SAs">(f)
+            </li>
+            <li>
+              <p class="SAType">50</p>
+              <input type="button" value="0" class="js_SAs">(g)
+            </li>
+            <li>
+              <p class="SAType">55</p>
+              <input type="button" value="0" class="js_SAs">(h)
+            </li>
+          </ul>
+          <ul class="SATable">
+            <li>
+              <p class="SAType">60</p>
+              <input type="button" value="0" class="js_SAs">(x)
+            </li>
+            <li>
+              <p class="SAType">65</p>
+              <input type="button" value="0" class="js_SAs">(c)
+            </li>
+            <li>
+              <p class="SAType">70</p>
+              <input type="button" value="0" class="js_SAs">(v)
+            </li>
+            <li>
+              <p class="SAType">75</p>
+              <input type="button" value="0" class="js_SAs">(b)
+            </li>
+            <li>
+              <p class="SAType">80</p>
+              <input type="button" value="0" class="js_SAs">(n)
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div id="js_opp3" class="opp">
+        <h3>３匹目(ctrl +3)</h3>
+        <div class="CEng">エネルギー: <input class="js_CEgy" value=0 type="number" readonly></div>
+        <div class="NAEgy">
+          =通常技EPTank:
+          <select class="js_NAEgy">
+            <option value="20">20</option>
+            <option value="16">16</option>
+            <option value="13">13</option>
+            <option value="12">12</option>
+            <option value="11">11</option>
+            <option value="10">10</option>
+            <option value="9">9</option>
+            <option value="8">8</option>
+            <option value="7">7</option>
+            <option value="6">6</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+          </select>
+          (q)
+        </div>
+        <div class="NACnt">×<input class="js_NACnt" type="button">回(a)</div>
+        <div class="SAInfo">
+          <ul class="SATable">
+            <li>
+              <p class="SAType">35</p>
+              <input type="button" value="0" class="js_SAs">(s)
+            </li>
+            <li>
+              <p class="SAType">40</p>
+              <input type="button" value="0" class="js_SAs">(d)
+            </li>
+            <li>
+              <p class="SAType">45</p>
+              <input type="button" value="0" class="js_SAs">(f)
+            </li>
+            <li>
+              <p class="SAType">50</p>
+              <input type="button" value="0" class="js_SAs">(g)
+            </li>
+            <li>
+              <p class="SAType">55</p>
+              <input type="button" value="0" class="js_SAs">(h)
+            </li>
+          </ul>
+          <ul class="SATable">
+            <li>
+              <p class="SAType">60</p>
+              <input type="button" value="0" class="js_SAs">(x)
+            </li>
+            <li>
+              <p class="SAType">65</p>
+              <input type="button" value="0" class="js_SAs">(c)
+            </li>
+            <li>
+              <p class="SAType">70</p>
+              <input type="button" value="0" class="js_SAs">(v)
+            </li>
+            <li>
+              <p class="SAType">75</p>
+              <input type="button" value="0" class="js_SAs">(b)
+            </li>
+            <li>
+              <p class="SAType">80</p>
+              <input type="button" value="0" class="js_SAs">(n)
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+
+
+    </section>
+    <section id="history">
+      <div id="js_history1"></div>
+      <div id="js_history2"></div>
+      <div id="js_history3"></div>
+    </section>
   </div>
-  <div id="ctrls">
-  </div>
-</div>
 
 
 
 
-<footer><a href="https://twitter.com/beeby001">Copyright © 2021 @Beeby00 All Rights Reserved.</a></footer>
+  <footer><a href="https://twitter.com/beeby001">Copyright © 2021 @Beeby00 All Rights Reserved.</a></footer>
 
+  <script src="./script/main_class.js"></script>
+</body>
